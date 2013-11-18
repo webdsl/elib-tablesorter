@@ -28,7 +28,7 @@
     odd        : ""  // even row zebra striping
   });
  
-  function initTableSorter( elemId ){
+  function initTableSorter( elemId, pageSize ){
 	  
 	  var $table = $("#"+elemId).tablesorter({
 	    // this will apply the bootstrap theme if "uitheme" widget is included
@@ -82,8 +82,9 @@
 	    // output string - default is '{page}/{totalPages}';
 	    // possible variables: {page}, {totalPages}, {filteredPages},
 		// {startRow}, {endRow}, {filteredRows} and {totalRows}
-	    output: '{startRow} - {endRow} / {filteredRows} ({totalRows})'
-			
+	    output: '{startRow} - {endRow} / {filteredRows} ({totalRows})',
+	    
+	    size: pageSize			
 	  });		
 	  
 	  // Target the $('.search') input using built in functioning

@@ -1,8 +1,10 @@
 module elib-tablesorter/tables
 
-	define sortedTableBordered(){
+	define sortedTableBordered( pageSize :  Int){
+		var pageSizes : Set<Int> := {pageSize,5,10,25,50,100};
 		var idAttr := attribute("id");
 		var elemId := if (idAttr != "") idAttr else randomUUID().toString();
+		var pagerStyle:= "width: 100%;  display: block; padding: 4px 4px; border-style: inherit; border: 1px solid #dddddd;border-bottom-style: hidden;border-radius: 4px 60px 0px 0px; position: inherit; text-align: inherit;";
 		includeCSS("theme.bootstrap.css")
 		includeJS("jquery.tablesorter.min.js")
 		includeJS("jquery.tablesorter.widgets.min.js")
@@ -10,13 +12,11 @@ module elib-tablesorter/tables
 		includeJS("tablesorter-init.js")
 		<script>
 			$(document).ready(function(){
-				  initTableSorter( "~elemId" );
+				  initTableSorter( "~elemId", ~pageSize );
 			}); 
 		</script>
-		
-		tableBordered[id=elemId, all attributes except "id"]{
-			elements
-			<tfoot>row{<th id="pager"+elemId colspan="42">
+				
+		<span id="pager"+elemId style=pagerStyle>
 			buttonGroup{
 				pagerButton("first"){ iFastBackward }
 				pagerButton("prev"){ iBackward }
@@ -26,14 +26,13 @@ module elib-tablesorter/tables
 			} " "
 			<input placeholder="filter" id="search"+elemId /> " "
 			<select class="pagesize input-mini" title="Select page size">
-				<option selected="selected" value="10">"10"</option>
-				<option value="20">"20"</option>
-				<option value="30">"30"</option>
-				<option value="40">"40"</option>
+				for( p in pageSizes order by p){
+					<option value=""+p>output(p)</option>
+				}
 			</select>
-	        
-	        </th>}
-			</tfoot>
+        </span>
+		tableBordered[id=elemId, all attributes except "id"]{
+			elements
 		}
 	}
 	define pagerButton(class : String){
