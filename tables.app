@@ -4,7 +4,7 @@ module elib-tablesorter/tables
 		var pageSizes : Set<Int> := {pageSize,5,10,25,50,100};
 		var idAttr := attribute("id");
 		var elemId := if (idAttr != "") idAttr else randomUUID().toString();
-		var pagerStyle:= "width: 100%;  display: block; padding: 4px 4px; border-style: inherit; border: 1px solid #dddddd;border-bottom-style: hidden;border-radius: 4px 60px 0px 0px; position: inherit; text-align: inherit;";
+		var pagerStyle:= "width: 100%;  display: block; padding: 4px 30px 4px 4px; border-style: inherit; border: 1px solid #dddddd;border-bottom-style: hidden;border-radius: 4px 60px 0px 0px; position: inherit; text-align: inherit;";
 		includeCSS("theme.bootstrap.css")
 		includeJS("jquery.tablesorter.min.js")
 		includeJS("jquery.tablesorter.widgets.min.js")
