@@ -69,7 +69,7 @@
 	  .tablesorterPager({
 	
 	    // target the pager markup - see the HTML block below
-	    container: $("#pager" + elemId),
+	    container: $(".pager" + elemId),
 	
 	    // target the pager page select dropdown - choose a page
 	    cssGoto  : ".pagenum",
