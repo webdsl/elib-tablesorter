@@ -1,4 +1,4 @@
-module elib/elib-tablesorter/tables
+module elib/elib-tablesorter/lib
 
 	define sortedTableBordered( pageSize :  Int){
 		var pageSizes : Set<Int> := {pageSize,5,10,25,50,100};
