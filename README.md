@@ -26,7 +26,7 @@ sortedTableBordered(25){
 	theader{ row {
 		th{ "Student"     }
 		th[class="sorter-false"]{ "Submissions" }
-    		th{ "Started"     }
+		th{ "Started"     }
 		th{ "Completed"   }
 		th{ "Grade"       }
 		th{ "Passed"      }
