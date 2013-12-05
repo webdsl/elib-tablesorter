@@ -25,7 +25,7 @@ module elib/elib-tablesorter/lib
 		</script>
 				
 		<span class="pager"+elemId style=pagerStyle>
-			<input placeholder="Type to filter" id="search"+elemId /> 
+			<input type="search" placeholder="Type to filter" id="search"+elemId /> 
 			<span class="small">" showing: " <span class="pagedisplay">" "</span></span>
         </span>
 		tableBordered[id=elemId, style="margin-bottom: 0px; "+attribute("style") , all attributes except ["id","style"] ]{
