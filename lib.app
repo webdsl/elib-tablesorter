@@ -9,7 +9,24 @@ module elib/elib-tablesorter/lib
 		includeJS("tablesorter-init.js")
 	}
 
+
 	define sortedTableBordered( pageSize :  Int){
+		sortedTableBordered( pageSize, true, true )
+	}
+	
+	define sortedTableBordered( pageSize : Int, numberOfElemRows : Int ){
+		if( numberOfElemRows > pageSize ){
+			sortedTableBordered(pageSize, true, true)
+		} else { sortedTableBordered(pageSize, false, false) }
+	}
+	
+	define sortedTableBordered( pageSize : Int, showSearch : Bool, numberOfElemRows : Int){
+		if( numberOfElemRows > pageSize ){
+			sortedTableBordered(pageSize, showSearch, true)
+		} else { sortedTableBordered(pageSize, showSearch, false) }
+	}
+	
+	define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination : Bool){
 		var pageSizes : Set<Int> := {pageSize,5,10,25,50,100};
 		var idAttr := attribute("id");
 		var elemId := if (idAttr != "") idAttr else randomUUID().toString();
@@ -23,28 +40,35 @@ module elib/elib-tablesorter/lib
 				  initTableSorter( "~elemId", ~pageSize );
 			}); 
 		</script>
-				
-		<span class="pager"+elemId style=pagerStyle>
-			<input type="search" placeholder="Type to filter" id="search"+elemId /> 
-			<span class="small">" showing: " <span class="pagedisplay">" "</span></span>
-        </span>
+		if(showPagination || showSearch){	
+			<span class="pager"+elemId style=pagerStyle>
+				if(showSearch){ 
+					<input type="search" placeholder="Type to filter" id="search"+elemId /> 
+				}
+				if(showPagination){
+					<span class="small">" showing: " <span class="pagedisplay">" "</span></span>
+				}
+	        </span>
+        }
 		tableBordered[id=elemId, style="margin-bottom: 0px; "+attribute("style") , all attributes except ["id","style"] ]{
 			elements
 		}
-		<span class="pager"+elemId style=pagerStyleBottom>
-			buttonGroup{
-				pagerButton("first"){ iFastBackward }
-				pagerButton("prev"){ iBackward }
-				pagerButton("pagedisplay"){ " " } 
-				pagerButton("next"){ iForward}
-				pagerButton("last"){ iFastForward }
-			} " "
-			<select class="pagesize input-mini" title="Select page size">
-				for( p in pageSizes order by p){
-					<option value=""+p>output(p)</option>
-				}
-			</select>
-        </span>
+		if(showPagination){
+			<span class="pager"+elemId style=pagerStyleBottom>
+				buttonGroup{
+					pagerButton("first"){ iFastBackward }
+					pagerButton("prev"){ iBackward }
+					pagerButton("pagedisplay"){ " " } 
+					pagerButton("next"){ iForward}
+					pagerButton("last"){ iFastForward }
+				} " "
+				<select class="pagesize input-mini" title="Select page size">
+					for( p in pageSizes order by p){
+						<option value=""+p>output(p)</option>
+					}
+				</select>
+	        </span>
+        }
 	}
 	define pagerButton(class : String){
 		<button type="button" class="btn btn-default btn-sm " + class>elements</button>
