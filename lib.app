@@ -11,18 +11,18 @@ module elib/elib-tablesorter/lib
 
 
 	define sortedTableBordered( pageSize :  Int){
-		sortedTableBordered( pageSize, true, true )
+		sortedTableBordered( pageSize, true, true ){ elements }
 	}
 	
 	define sortedTableBordered( pageSize : Int, numberOfElemRows : Int ){
 		if( numberOfElemRows > pageSize ){
-			sortedTableBordered(pageSize, true, true)
-		} else { sortedTableBordered(pageSize, false, false) }
+			sortedTableBordered(pageSize, true, true){ elements }
+		} else { sortedTableBordered(pageSize, false, false){ elements } }
 	}
 	
 	define sortedTableBordered( pageSize : Int, showSearch : Bool, numberOfElemRows : Int){
 		if( numberOfElemRows > pageSize ){
-			sortedTableBordered(pageSize, showSearch, true)
+			sortedTableBordered(pageSize, showSearch, true){ elements }
 		} else { sortedTableBordered(pageSize, showSearch, false) }
 	}
 	
