@@ -17,13 +17,17 @@ module elib/elib-tablesorter/lib
 	define sortedTableBordered( pageSize : Int, numberOfElemRows : Int ){
 		if( numberOfElemRows > pageSize ){
 			sortedTableBordered(pageSize, true, true){ elements }
-		} else { sortedTableBordered(pageSize, false, false){ elements } }
+		} else {
+			sortedTableBordered(pageSize, false, false){ elements }
+		}
 	}
 	
 	define sortedTableBordered( pageSize : Int, showSearch : Bool, numberOfElemRows : Int){
 		if( numberOfElemRows > pageSize ){
 			sortedTableBordered(pageSize, showSearch, true){ elements }
-		} else { sortedTableBordered(pageSize, showSearch, false) }
+		} else {
+			sortedTableBordered(pageSize, showSearch, false){ elements}
+		}
 	}
 	
 	define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination : Bool){
