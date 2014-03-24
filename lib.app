@@ -41,7 +41,12 @@ module elib/elib-tablesorter/lib
 		
 		<script>
 			$(document).ready(function(){
+				try{
 				  initTableSorter( "~elemId", ~pageSize );
+				} catch (err){
+					//do nothing for now, happens when there are no rows in table,
+					//other javascripts should continue
+				}
 			}); 
 		</script>
 		if(showPagination || showSearch){	
