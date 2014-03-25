@@ -2,7 +2,7 @@ module elib/elib-tablesorter/lib
 
 	define tablesorterIncludes(){
 		includeCSS("theme.bootstrap.css")
-		includeJS("jquery-1.8.2.min.js")
+		includeJS(IncludePaths.jQueryJS())
 		includeJS("jquery.tablesorter.min.js")
 		includeJS("jquery.tablesorter.widgets.min.js")
 		includeJS("jquery.tablesorter.pager.min.js")
