@@ -52,10 +52,11 @@ module elib/elib-tablesorter/lib
 		if(showPagination || showSearch){	
 			<span class="pager"+elemId style=pagerStyle>
 				if(showSearch){ 
-					<input type="search" placeholder="Type to filter" id="search"+elemId /> 
+					<input type="search" placeholder="Type to filter" id="search"+elemId />
+					" " <div class="small">"Use '|' to match " <em>"multiple|terms"</em></div> 
 				}
 				if(showPagination){
-					<span class="small">" showing: " <span class="pagedisplay">" "</span></span>
+					<div class="small">" showing: " <span class="pagedisplay">" "</span></div>
 				}
 	        </span>
         }
