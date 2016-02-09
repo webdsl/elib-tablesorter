@@ -86,3 +86,6 @@ module elib/elib-tablesorter/lib
 	define makeSortable( order : String ){
 		<span style="display:none;"> output(order) </span>
 	}
+	define makeSortable(){
+		<span style="display:none;"> elements </span>
+	}
