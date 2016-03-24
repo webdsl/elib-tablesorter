@@ -1,20 +1,21 @@
-  $.extend($.tablesorter.themes.bootstrap, {
+$.tablesorter.themes.bootstrap = {
     // these classes are added to the table. To see other table classes
 	// available,
     // look here: http://twitter.github.com/bootstrap/base-css.html#tables
     table      : "table table-bordered",
+    caption      : 'caption',
     header     : "bootstrap-header", // give the header a gradient background
     footerRow  : "",
     footerCells: "",
     icons      : "", 
-    sortNone   : "icon-resize-vertical glyphicon glyphicon-sort",
-    sortAsc    : "icon-chevron-up glyphicon glyphicon-sort-by-attributes",     // includes
+    iconSortNone   : "icon-resize-vertical glyphicon glyphicon-sort",
+    iconSortAsc    : "icon-chevron-up glyphicon glyphicon-sort-by-attributes",     // includes
 																				// classes
 																				// for
 																				// Bootstrap
 																				// v2 &
 																				// v3
-    sortDesc   : "icon-chevron-down glyphicon glyphicon-sort-by-attributes-alt", // includes
+    iconSortDesc   : "icon-chevron-down glyphicon glyphicon-sort-by-attributes-alt", // includes
 																					// classes
 																					// for
 																					// Bootstrap
@@ -26,7 +27,7 @@
     filterRow  : "", // filter row class
     even       : "", // odd row zebra striping
     odd        : ""  // even row zebra striping
-  });
+  };
  
   function initTableSorter( elemId, pageSize ){
 	  
@@ -50,15 +51,17 @@
 			// included in the theme variable above
 		  // this is ONLY needed for bootstrap theming if you are using the
 			// filter widget, because rows are hidden
-		  zebra : ["even", "odd"],
-		
-		  // reset filters button
-		  filter_reset : ".reset",
+		  zebra : ["even", "odd"],		
+      filter_external : $("#search" +elemId),
+      // include column filters
+      filter_columnFilters: true,
+      filter_placeholder: { search : 'Search...' },
+      filter_saveFilters : true,
+      filter_reset: '.reset',
 		  
-		  // if true overrides default find rows behaviours and if any column
-			// matches query it returns that row
-		  filter_anyMatch : true,
-		  filter_columnFilters: false
+		  filter_columnFilters: true,
+	      // extra css class name (string or array) added to the filter element (input or select)
+    	  filter_cssFilter: "form-control",
 		
 		  // set the uitheme widget to use the bootstrap theme class names
 		  // this is no longer required, if theme is set
@@ -86,10 +89,4 @@
 	    
 	    size: pageSize			
 	  });		
-	  
-	  // Target the $('.search') input using built in functioning
-	  // this binds to the search using "search" and "keyup"
-	  // Allows using filter_liveSearch or delayed search &
-	  // pressing escape to cancel the search
-	  $.tablesorter.filter.bindSearch( $table, $("#search" +elemId) );
 }
