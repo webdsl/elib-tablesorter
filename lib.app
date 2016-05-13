@@ -10,22 +10,22 @@ define tablesorterIncludes(){
 
 
 define sortedTableBordered( pageSize :  Int){
-  sortedTableBordered( pageSize, true, true ){ elements }
+  sortedTableBordered( pageSize, true, true )[ all attributes ]{ elements }
 }
 
 define sortedTableBordered( pageSize : Int, numberOfElemRows : Int ){
   if( numberOfElemRows > pageSize ){
-    sortedTableBordered(pageSize, true, true){ elements }
+    sortedTableBordered(pageSize, true, true)[ all attributes ]{ elements }
   } else{
-    sortedTableBordered(pageSize, false, false){ elements }
+    sortedTableBordered(pageSize, false, false)[ all attributes ]{ elements }
   }
 }
 
 define sortedTableBordered( pageSize : Int, showSearch : Bool, numberOfElemRows : Int){
   if( numberOfElemRows > pageSize ){
-    sortedTableBordered(pageSize, showSearch, true){ elements }
+    sortedTableBordered(pageSize, showSearch, true)[ all attributes ]{ elements }
   } else{
-    sortedTableBordered(pageSize, showSearch, false){ elements}
+    sortedTableBordered(pageSize, showSearch, false)[ all attributes ]{ elements}
   }
 }
 
@@ -33,11 +33,13 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
   var pageSizes : Set<Int> := {pageSize,5,10,25,50,100};
   var idAttr := attribute("id");
   var elemId := if (idAttr != "") idAttr else randomUUID().toString();
+  var placeholderAttr := attribute("placeholder");
+  var placeholderText := if (placeholderAttr != "") placeholderAttr else "Search Table";
   var pagerStyle:= "width: 100%;  display: block; padding: 4px 30px 4px 30px; background-color: #eeeeee;border-style: inherit; border: 1px solid #ddd;border-bottom-style: hidden; position: inherit; text-align: center;";
   var pagerStyleBottom:= "width: 100%;  display: block; padding: 4px 30px 4px 4px; border-style: inherit; border: 1px solid #dddddd;border-top-style: hidden;background-color: #eeeeee; position: inherit; text-align: center; margin-bottom: 20px;";
-  
+
   tablesorterIncludes()
-  
+
   <script>
     $(document).ready(function(){
       try{
@@ -55,8 +57,8 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
       // controlGroup("Table"){
       gridRow{gridCol(4,4){
         if(showSearch){
-          <input type="search" class="form-control" placeholder="Search Table" id="search"+elemId data-column="all" />
-          
+          <input type="search" class="form-control" placeholder=placeholderText id="search"+elemId data-column="all" />
+
         }
         helpBlock{
           if(showSearch){ small{ "Use '|' to match " <em>"multiple|terms. "</em> } }
