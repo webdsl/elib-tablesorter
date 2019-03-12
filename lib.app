@@ -89,11 +89,12 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
             <option value=""+p>output(p)</option>
           }
         </select>
-      }
-    }
+      } }
   </span>
   
-}
+  }
+  //move modals outside table, to improve tablesorter initialization speed
+  <script> $('table#~elemId' + '>tbody>tr>td .modal').appendTo( $('body') ); </script>
 }
 define pagerButton(class : String){
   <button type="button" class="btn btn-default " + class>elements</button>
