@@ -35,6 +35,9 @@ $.tablesorter.themes.bootstrap = {
 	    // this will apply the bootstrap theme if "uitheme" widget is included
 	    // the widgetOptions.uitheme is no longer required to be set
 	    theme : "bootstrap",
+	    
+	    //Accented characters will get replaced by their character equivalent when the sortLocaleCompare option is true.
+	    sortLocaleCompare : true,
 	
 	    widthFixed: true,
 	
