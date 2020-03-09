@@ -1,3 +1,47 @@
+//Make accented characters/diacritics filterable by their non-accented equivalent.
+$.extend( $.tablesorter.characterEquivalents, {
+"a" : "āăą",
+"A" : "ĀĂĄ",
+"c" : "ćĉċč",
+"C" : "ĆĈĊČ",
+"d" : "ďđ",
+"D" : "ĎĐ",
+"e" : "ēĕėęě",
+"E" : "ĒĔĖĘĚ",
+"g" : "ĝğġģ",
+"G" : "ĜĞĠĢ",
+"h" : "ĥħ",
+"H" : "ĤĦ",
+"i" : "ĩīĭįıĳ",
+"I" : "ĨĪĬĮİĲ",
+"j" : "ĵ",
+"J" : "Ĵ",
+"k" : "ķĸ",
+"K" : "Ķ",
+"l" : "ĺļľŀł",
+"L" : "ĹĻĽĿŁ",
+"n" : "ńņňŉŋ",
+"N" : "ŃŅŇŊ",
+"o" : "ōŏőœ",
+"O" : "ŌŎŐŒ",
+"r" : "ŕŗř",
+"R" : "ŔŖŘ",
+"s" : "śŝşšſ",
+"S" : "ŚŜŞŠ",
+"ss" : '\u00df',
+"SS": '\u1e9e',
+"t" : "ţťŧ",
+"T" : "ŢŤŦ",
+"u" : "ũūŭůűų",
+"U" : "ŨŪŬŮŰŲ",
+"w" : "ŵ",
+"W" : "Ŵ",
+"y" : "ŷ",
+"Y" : "ŶŸ",
+"z" : "źżž",
+"Z" : "ŹŻŽ"
+}); 
+
 $.tablesorter.themes.bootstrap = {
     // these classes are added to the table. To see other table classes
 	// available,
@@ -37,6 +81,7 @@ $.tablesorter.themes.bootstrap = {
 	    theme : "bootstrap",
 	    
 	    //Accented characters will get replaced by their character equivalent when the sortLocaleCompare option is true.
+	    //We use the above included equivalence mapping
 	    sortLocaleCompare : true,
 	
 	    widthFixed: true,
