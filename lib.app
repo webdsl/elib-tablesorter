@@ -30,13 +30,13 @@ define sortedTableBordered( pageSize : Int, showSearch : Bool, numberOfElemRows 
 }
 
 define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination : Bool){
-  var pageSizes : Set<Int> := {pageSize,5,10,25,50,100};
-  var idAttr := attribute("id");
-  var elemId := if (idAttr != "") idAttr else randomUUID().toString();
-  var placeholderAttr := attribute("placeholder");
-  var placeholderText := if (placeholderAttr != "") placeholderAttr else "Search Table";
-  var pagerStyle:= "width: 100%;  display: block; padding: 4px 30px 4px 30px; background-color: #eeeeee;border-style: inherit; border: 1px solid #ddd;border-bottom-style: hidden; position: inherit; text-align: center;";
-  var pagerStyleBottom:= "width: 100%;  display: block; padding: 4px 30px 4px 4px; border-style: inherit; border: 1px solid #dddddd;border-top-style: hidden;background-color: #eeeeee; position: inherit; text-align: center; margin-bottom: 20px;";
+  var pageSizes : Set<Int> := {pageSize,5,10,25,50,100}
+  var idAttr := attribute("id")
+  var elemId := if (idAttr != "") idAttr else randomUUID().toString()
+  var placeholderAttr := attribute("placeholder")
+  var placeholderText := if (placeholderAttr != "") placeholderAttr else "Search Table"
+  var pagerStyle:= "width: 100%;  display: block; padding: 4px 30px 4px 30px; background-color: #eeeeee;border-style: inherit; border: 1px solid #ddd;border-bottom-style: hidden; position: inherit; text-align: center;"
+  var pagerStyleBottom:= "width: 100%;  display: block; padding: 4px 30px 4px 4px; border-style: inherit; border: 1px solid #dddddd;border-top-style: hidden;background-color: #eeeeee; position: inherit; text-align: center; margin-bottom: 20px;"
 
   tablesorterIncludes()
 
@@ -57,7 +57,7 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
       // controlGroup("Table"){
       gridRow{gridCol(4,4){
         if(showSearch){
-          <input type="search" class="form-control" placeholder=placeholderText id="search"+elemId data-column="all" />
+          <input type="search" class="form-control" placeholder=placeholderText id="search"+elemId data-column="all" if(attribute("autofocus") != ""){ autofocus="true" } />
 
         }
         helpBlock{
@@ -68,7 +68,7 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
       // }
     </div>
   }
-  tableBordered[id=elemId, style="margin-bottom: 0px; "+attribute("style") , all attributes except ["id","style"] ]{
+  tableBordered[id=elemId, style="margin-bottom: 0px; "+attribute("style") , all attributes except ["id","style", "autofocus"] ]{
     elements
   }
   if(showPagination){
