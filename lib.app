@@ -1,5 +1,7 @@
 module elib/elib-tablesorter/lib
 
+imports elib/elib-bootstrap/-
+
 define tablesorterIncludes(){
   includeCSS("theme.bootstrap.min.css")
   includeJS(IncludePaths.jQueryJS())
