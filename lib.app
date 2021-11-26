@@ -14,11 +14,7 @@ define sortedTableBordered( pageSize :  Int){
 }
 
 define sortedTableBordered( pageSize : Int, numberOfElemRows : Int ){
-  if( numberOfElemRows > pageSize ){
-    sortedTableBordered(pageSize, true, true)[ all attributes ]{ elements }
-  } else{
-    sortedTableBordered(pageSize, false, false)[ all attributes ]{ elements }
-  }
+  sortedTableBordered(pageSize, numberOfElemRows > pageSize, true)[ all attributes ]{ elements }
 }
 
 define sortedTableBordered( pageSize : Int, showSearch : Bool, numberOfElemRows : Int){
@@ -61,8 +57,11 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
 
         }
         helpBlock{
-          if(showSearch){ small{ "Use '|' to match " <em>"multiple|terms. "</em> } }
-          if(showPagination){ small{ " Showing: " <span class="pagedisplay">" "</span> } }
+          if(showSearch){
+            small{ "Use '|' to match " <em>"multiple|terms. "</em> }
+            br
+          }
+          small{ " Showing: " <span class="pagedisplay">" "</span> }
         }
       } }
       // }
