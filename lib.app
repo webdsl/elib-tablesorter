@@ -72,9 +72,7 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
   }
   if(showPagination){
     
-    <span class="pager"+elemId style=pagerStyleBottom>
-      gridRow{ gridColAdapt(3,4){}
-      gridColAdapt(5,4){
+    <center class="form-inline pager"+elemId style=pagerStyleBottom>      
         buttonGroup{
           pagerButton("first"){ iFastBackward }
           pagerButton("prev"){ iBackward }
@@ -82,21 +80,19 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
           pagerButton("next"){ iForward}
           pagerButton("last"){ iFastForward }
         }
-      } gridColAdapt(2,1){
-        <select class="pagesize form-control" title="Select page size">
+        <select class="pagesize input-sm form-control" title="Select page size">
           for( p in pageSizes order by p){
             <option value=""+p>output(p)</option>
           }
         </select>
-      } }
-  </span>
+  </center>
   
   }
   //move modals outside table, to improve tablesorter initialization speed
   <script> $('table#~elemId' + '>tbody>tr>td .modal').appendTo( $('body') ); </script>
 }
 define pagerButton(class : String){
-  <button type="button" class="btn btn-default " + class>elements</button>
+  <button type="button" class="btn btn-default btn-sm " + class>elements</button>
 }
 define makeSortable( order : String ){
   <span style="display:none;"> output(order) </span>
