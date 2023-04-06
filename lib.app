@@ -89,7 +89,7 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
   
   }
   //move modals outside table, to improve tablesorter initialization speed
-  <script> $('table#~elemId' + '>tbody>tr>td .modal').appendTo( $('body') ); </script>
+  <script> var tbl= $('table#~elemId'); tbl.find('tbody>tr>td .modal').insertAfter( tbl ); </script>
 }
 define pagerButton(class : String){
   <button type="button" class="btn btn-default btn-sm " + class>elements</button>
