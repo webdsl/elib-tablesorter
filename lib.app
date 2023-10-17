@@ -26,20 +26,38 @@ define sortedTableBordered( pageSize : Int, showSearch : Bool, numberOfElemRows 
 }
 
 define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination : Bool){
-  var pageSizes : Set<Int> := {pageSize,5,10,25,50,100}
+  var pageSizesStr := List<String>()
+  var selectedPageSize := "all"
   var idAttr := attribute("id")
   var elemId := if (idAttr != "") idAttr else id
   var placeholderAttr := attribute("placeholder")
   var placeholderText := if (placeholderAttr != "") placeholderAttr else "Search Table"
   var pagerStyle:= "width: 100%;  display: block; padding: 4px 30px 4px 30px; background-color: #eeeeee;border-style: inherit; border: 1px solid #ddd;border-bottom-style: hidden; position: inherit; text-align: center;"
   var pagerStyleBottom:= "width: 100%;  display: block; padding: 4px 30px 4px 4px; border-style: inherit; border: 1px solid #dddddd;border-top-style: hidden;background-color: #eeeeee; position: inherit; text-align: center; margin-bottom: 20px;"
+  var paginationStorageVar := "tablePagination_" + elemId 
 
   tablesorterIncludes()
+  init{
+    if(showPagination){
+	    var pageSizes := [10, 25, 50, 100, 200, 500, 1000, 2000];
+	    var idx := 0;
+	    
+	    while( pageSizesStr.length < 4 || (idx < pageSizes.length && pageSize > pageSizes.get(idx) ) ){
+	      var size := pageSizes.get(idx);
+	      pageSizesStr.add( "" + size );
+	      if(selectedPageSize == "all" && size > pageSize){
+	        selectedPageSize := ""+size;
+	      }
+	      idx := idx + 1;
+	    }
+	    pageSizesStr.add("all");
+    }
+  }
 
   <script>
     $(document).ready(function(){
       try{
-        initTableSorter( "~elemId", ~pageSize );
+        initTableSorter( "~elemId", ~selectedPageSize );
       } catch (err){
         //do nothing for now, happens when there are no rows in table,
         //other javascripts should continue
@@ -80,9 +98,9 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
           pagerButton("next"){ iForward}
           pagerButton("last"){ iFastForward }
         }
-        <select class="pagesize input-sm form-control" title="Select page size">
-          for( p in pageSizes order by p){
-            <option value=""+p>output(p)</option>
+        <select class="pagesize input-sm form-control" title="Select page size" onchange="sessionStorage.setItem('~paginationStorageVar', this.value)">
+          for( p in pageSizesStr){
+            <option value=p> ~p </option>
           }
         </select>
   </center>
