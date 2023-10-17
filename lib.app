@@ -28,7 +28,7 @@ define sortedTableBordered( pageSize : Int, showSearch : Bool, numberOfElemRows 
 define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination : Bool){
   var pageSizes : Set<Int> := {pageSize,5,10,25,50,100}
   var idAttr := attribute("id")
-  var elemId := if (idAttr != "") idAttr else randomUUID().toString()
+  var elemId := if (idAttr != "") idAttr else id
   var placeholderAttr := attribute("placeholder")
   var placeholderText := if (placeholderAttr != "") placeholderAttr else "Search Table"
   var pagerStyle:= "width: 100%;  display: block; padding: 4px 30px 4px 30px; background-color: #eeeeee;border-style: inherit; border: 1px solid #ddd;border-bottom-style: hidden; position: inherit; text-align: center;"
