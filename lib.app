@@ -34,41 +34,36 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
   var placeholderText := if (placeholderAttr != "") placeholderAttr else "Search Table"
   var pagerStyle:= "width: 100%;  display: block; padding: 4px 30px 4px 30px; background-color: #eeeeee;border-style: inherit; border: 1px solid #ddd;border-bottom-style: hidden; position: inherit; text-align: center;"
   var pagerStyleBottom:= "width: 100%;  display: block; padding: 4px 30px 4px 4px; border-style: inherit; border: 1px solid #dddddd;border-top-style: hidden;background-color: #eeeeee; position: inherit; text-align: center; margin-bottom: 20px;"
-  var paginationStorageVar := "tablePagination_" + elemId 
 
   tablesorterIncludes()
   init{
     if(showPagination){
-	    var pageSizes := [10, 25, 50, 100, 200, 500, 1000, 2000];
-	    var idx := 0;
-	    
-	    while( pageSizesStr.length < 4 || (idx < pageSizes.length && pageSize > pageSizes.get(idx) ) ){
-	      var size := pageSizes.get(idx);
-	      pageSizesStr.add( "" + size );
-	      if(selectedPageSize == "all" && size > pageSize){
-	        selectedPageSize := ""+size;
-	      }
-	      idx := idx + 1;
-	    }
-	    pageSizesStr.add("all");
+      var pageSizes := [10, 25, 50, 100, 200, 500, 1000, 2000];
+      var idx := 0;
+      
+      while( idx < 4 || (idx < pageSizes.length && pageSize > pageSizes.get(idx-1) ) ){
+        var size := pageSizes.get(idx);
+        pageSizesStr.add( "" + size );
+        if(selectedPageSize == "all" && size > pageSize){
+          selectedPageSize := ""+size;
+        }
+        idx := idx + 1;
+      }
+      pageSizesStr.add("all");
     }
   }
 
   <script>
     $(document).ready(function(){
       try{
-        initTableSorter( "~elemId", ~selectedPageSize );
+        initTableSorter( "~elemId", "~selectedPageSize" );
       } catch (err){
-        //do nothing for now, happens when there are no rows in table,
-        //other javascripts should continue
+        console.log("Failed to initialize tablesorter for table (id: ~elemId) - table may be empty.");
       }
     });
   </script>
   if(showPagination || showSearch){
-    // <span class="pager"+elemId style=pagerStyle>
-    // <span class="form-horizontal pager"+elemId>
     <div class="form-horizontal pager"+elemId style=pagerStyle>
-      // controlGroup("Table"){
       gridRow{gridCol(4,4){
         if(showSearch){
           <input type="search" class="form-control" placeholder=placeholderText id="search"+elemId data-column="all" if(attribute("autofocus") != ""){ autofocus="true" } />
@@ -82,7 +77,6 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
           small{ " Showing: " <span class="pagedisplay">" "</span> }
         }
       } }
-      // }
     </div>
   }
   tableBordered[id=elemId, style="margin-bottom: 0px; "+attribute("style") , all attributes except ["id","style", "autofocus"] ]{
@@ -98,7 +92,7 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
           pagerButton("next"){ iForward}
           pagerButton("last"){ iFastForward }
         }
-        <select class="pagesize input-sm form-control" title="Select page size" onchange="sessionStorage.setItem('~paginationStorageVar', this.value)">
+        <select class="pagesize input-sm form-control" title="Select page size">
           for( p in pageSizesStr){
             <option value=p> ~p </option>
           }
