@@ -39,6 +39,9 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
   init{
     if(showPagination){
       var pageSizes := [10, 25, 50, 100, 200, 500, 1000, 2000];
+      if(pageSize < 10 && pageSize > 0){
+        pageSizes.insert(0, pageSize);
+      }
       var idx := 0;
       
       while( idx < 4 || (idx < pageSizes.length && pageSize > pageSizes.get(idx-1) ) ){
