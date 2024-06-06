@@ -97,7 +97,7 @@ define sortedTableBordered( pageSize :  Int, showSearch : Bool, showPagination :
         }
         <select class="pagesize input-sm form-control" title="Select page size">
           for( p in pageSizesStr){
-            <option value=p> ~p </option>
+            <option value=p> output(p) </option>
           }
         </select>
   </center>
